@@ -9,6 +9,7 @@
 .sidebar__header > .MuiAvatar-root {
     width: 30px;
     height: 30px;
+    margin-top: 2px;
 }
 
 .sidebar__header > h1 {
@@ -20,4 +21,22 @@
     height: 35px;
     padding: 5px;
     margin-top: 5px;
+}
+
+.sidebar__search > form {
+    display: grid;
+    grid-template-columns: auto 20px;
+    justify-items: center;
+    align-items: center;
+    background-color: var(--sidebar-search);
+    border-radius: 2px;
+    margin: 0 15px 15px 15px;
+    padding: 10px 15px;
+}
+
+.sidebar__search > form > input {
+    outline: none;
+    border: none;
+    background-color: var(--sidebar-search);
+    width: 100%;
 }

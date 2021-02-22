@@ -6,18 +6,24 @@ import * as MdIcons from 'react-icons/md';
 const Sidebar = () => {
     return (
         <div className='sidebar'>
+
             <div className="sidebar__header">
                 <Avatar />
                 <h1>Group Messenger</h1>
-                <Tooltip title='Add channel'>
+                <Tooltip title='Add Channel'>
                     <IconButton>
                         <MdIcons.MdAddCircleOutline />
                     </IconButton>
                 </Tooltip>
             </div>
-            <div className="sidebar__search">
 
+            <div className="sidebar__search">
+                <form>
+                    <input type='text' placeholder='Search' />
+                    <MdIcons.MdSearch />
+                </form>
             </div>
+
             <div className="sidebar__items">
 
             </div>
