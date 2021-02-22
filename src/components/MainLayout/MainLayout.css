@@ -1,0 +1,14 @@
+.mainLayout__header {
+    height: 5px;
+    background-color: var(--header-background-color);
+}
+
+.mainLayout__content {
+    display: flex;
+}
+
+.mainLayout__sidebar {
+    background-color: var(--sidebar-background-color);
+    min-width: 320px;
+    height: 100vh;
+}
