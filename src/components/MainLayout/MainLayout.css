@@ -1,0 +1,18 @@
+.mainLayout {
+    height: 100vh;
+}
+
+.mainLayout__header {
+    height: 5px;
+    background-color: var(--header-background-color);
+}
+
+.mainLayout__content {
+    display: flex;
+    height: 100%;
+}
+
+.mainLayout__sidebar {
+    background-color: var(--sidebar-background-color);
+    width: 320px;
+}
