@@ -2,6 +2,7 @@ import React from 'react';
 import './Sidebar.css';
 import { Avatar, Tooltip, IconButton } from '@material-ui/core';
 import * as MdIcons from 'react-icons/md';
+import SidebarItem from './SidebarItem/SidebarItem';
 
 const Sidebar = () => {
     return (
@@ -25,7 +26,9 @@ const Sidebar = () => {
             </div>
 
             <div className="sidebar__items">
-
+                <SidebarItem />
+                <SidebarItem />
+                <SidebarItem />
             </div>
         </div>
     )

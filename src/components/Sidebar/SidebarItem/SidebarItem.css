@@ -1,0 +1,39 @@
+.sidebarItem {
+    padding: 7px 15px 7px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebarItem:hover {
+    background-color: var(--sidebar-hover-room);
+    cursor: pointer;
+}
+
+.sidebarItem > .MuiAvatar-root {
+    width: 50px;
+    height: 50px;
+}
+
+.sidebarItem__content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin-left: 15px;
+}
+
+.sidebarItem__content > h6 {
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sidebarItem__content > p {
+    color: var(--secondary-text-color);
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
