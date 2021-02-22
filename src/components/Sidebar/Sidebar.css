@@ -1,0 +1,23 @@
+.sidebar__header {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 30px auto 35px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar__header > .MuiAvatar-root {
+    width: 30px;
+    height: 30px;
+}
+
+.sidebar__header > h1 {
+    font-size: 16px;
+}
+
+.sidebar__header > button {
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    margin-top: 5px;
+}
