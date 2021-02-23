@@ -1,0 +1,3 @@
+import { UserActionsTypes } from './User/UserActionsModel';
+
+export type AppActions = UserActionsTypes; // | DetailActionTypes ...
