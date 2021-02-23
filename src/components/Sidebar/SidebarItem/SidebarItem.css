@@ -1,5 +1,5 @@
 .sidebarItem {
-    padding: 7px 15px 7px 15px;
+    padding: 10px 15px 10px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -10,9 +10,13 @@
     cursor: pointer;
 }
 
+.sidebarItem-selected {
+    background-color: red;
+}
+
 .sidebarItem > .MuiAvatar-root {
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
 }
 
 .sidebarItem__content {
@@ -20,6 +24,7 @@
     flex-direction: column;
     overflow: hidden;
     margin-left: 15px;
+    margin-right: 5px;
 }
 
 .sidebarItem__content > h6 {
