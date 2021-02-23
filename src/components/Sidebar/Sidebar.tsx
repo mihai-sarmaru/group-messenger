@@ -1,10 +1,26 @@
 import React from 'react';
 import './Sidebar.css';
 import { Avatar, Tooltip, IconButton } from '@material-ui/core';
+import db from '../../firebase/firebase';
+import { IRoom } from '../../utils/interfaces';
+import { validateRoomName } from '../../utils/validation';
 import * as MdIcons from 'react-icons/md';
 import SidebarItem from './SidebarItem/SidebarItem';
 
 const Sidebar = () => {
+
+    const addNewRoom = () => {
+        const roomName = prompt('New room name');
+
+        if (roomName && validateRoomName(roomName)) {
+            const room: IRoom = {
+                name: roomName.trim()
+            }
+
+            db.collection('rooms').add(room);
+        }
+    }
+
     return (
         <div className='sidebar'>
 
@@ -12,7 +28,7 @@ const Sidebar = () => {
                 <Avatar />
                 <h1>Group Messenger</h1>
                 <Tooltip title='Add Channel'>
-                    <IconButton>
+                    <IconButton onClick={addNewRoom}>
                         <MdIcons.MdAddCircleOutline />
                     </IconButton>
                 </Tooltip>
