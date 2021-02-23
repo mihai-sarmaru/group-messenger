@@ -22,9 +22,9 @@ const MainLayout = () => {
 
                 dispatch(loginUser({
                     uid: result.user!.uid,
-                    name: result.user!.displayName,
-                    email: result.user!.email,
-                    avatar: result.user!.photoURL
+                    name: result.user!.displayName ? result.user!.displayName : 'Unknown',
+                    email: result.user!.email ? result.user!.email : 'Unknown email',
+                    avatar: result.user!.photoURL ? result.user!.photoURL : '',
                 }));
 
                 // connectToDatabase();

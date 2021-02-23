@@ -7,10 +7,14 @@ import { IRoom, IFirebaseRoom } from '../../utils/interfaces';
 import { validateRoomName } from '../../utils/validation';
 import * as MdIcons from 'react-icons/md';
 import SidebarItem from './SidebarItem/SidebarItem';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/rootStore';
 
 const Sidebar = () => {
 
     const [rooms, setRooms] = useState<IFirebaseRoom[]>();
+
+    const user = useSelector((state: AppState) => state.userReducer.user);
 
     useEffect(() => {
         db.collection('rooms').orderBy('name', 'asc').onSnapshot(snapshot => {
@@ -39,7 +43,9 @@ const Sidebar = () => {
         <div className='sidebar'>
 
             <div className="sidebar__header">
-                <Avatar />
+                <Tooltip title={user.name}>
+                    <Avatar src={user.avatar} alt={user.name} />
+                </Tooltip>
                 <h1>Group Messenger</h1>
                 <Tooltip title='Add Channel'>
                     <IconButton onClick={addNewRoom}>
