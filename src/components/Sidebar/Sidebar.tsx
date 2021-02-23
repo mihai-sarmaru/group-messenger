@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
+import { Link } from 'react-router-dom';
 import { Avatar, Tooltip, IconButton } from '@material-ui/core';
 import db from '../../firebase/firebase';
-import { IRoom } from '../../utils/interfaces';
+import { IRoom, IFirebaseRoom } from '../../utils/interfaces';
 import { validateRoomName } from '../../utils/validation';
 import * as MdIcons from 'react-icons/md';
 import SidebarItem from './SidebarItem/SidebarItem';
 
 const Sidebar = () => {
+
+    const [rooms, setRooms] = useState<IFirebaseRoom[]>();
+
+    useEffect(() => {
+        db.collection('rooms').orderBy('name', 'asc').onSnapshot(snapshot => {
+            setRooms(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    data: doc.data()
+                }
+            }));
+        });
+    }, []);
 
     const addNewRoom = () => {
         const roomName = prompt('New room name');
@@ -42,9 +56,9 @@ const Sidebar = () => {
             </div>
 
             <div className="sidebar__items">
-                <SidebarItem />
-                <SidebarItem />
-                <SidebarItem />
+                {rooms?.map(room => <Link key={room.id} to={`/room/${room.id}`}>
+                    <SidebarItem id={room.id} data={room.data} />
+                </Link>)}
             </div>
         </div>
     )

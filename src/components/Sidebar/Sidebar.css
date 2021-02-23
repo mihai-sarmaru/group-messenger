@@ -55,3 +55,8 @@
     height: 100%;
     overflow-y: auto;
 }
+
+.sidebar__items > a {
+    text-decoration: none;
+    color: inherit;
+}
