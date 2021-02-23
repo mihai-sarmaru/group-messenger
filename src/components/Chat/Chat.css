@@ -1,6 +1,7 @@
 .chat {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: max-content auto max-content;
+    height: 100%;
 }
 
 .chat__header {
@@ -14,4 +15,34 @@
 .chat__header > h1 {
     font-size: 16px;
     margin-left: 20px;
+}
+
+.chat__content {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.chat__footer {
+    padding-top: 10px;
+    margin: 10px 15px;
+    border-top: 1px solid var(--sidebar-background-color);
+}
+
+.chat__footer > form {
+    display: flex;
+    align-items: center;
+}
+
+.chat__footer > form > input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    background-color: var(--sidebar-background-color);
+    border-radius: 20px;
+}
+
+.chat__footer > form > button > span > svg {
+    color: var(--accent-color);
 }

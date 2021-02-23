@@ -7,6 +7,8 @@ import { IFirebaseRoom } from '../../utils/interfaces';
 import env from '../../utils/env';
 import { ChatParamTypes } from '../../utils/interfaces';
 import ChatItem from './ChatItem/ChatItem';
+import { IconButton, Tooltip } from '@material-ui/core';
+import * as MdIcons from 'react-icons/md';
 
 const Chat = () => {
 
@@ -39,7 +41,14 @@ const Chat = () => {
             </div>
 
             <div className="chat__footer">
-
+                <form>
+                    <input type='text' placeholder='Type a message...' />
+                    <Tooltip title='Send Message'>
+                        <IconButton>
+                            <MdIcons.MdSend />
+                        </IconButton>
+                    </Tooltip>
+                </form>
             </div>
         </div>
     )
