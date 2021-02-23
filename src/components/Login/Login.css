@@ -1,0 +1,28 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--sidebar-background-color);
+    height: 100vh;
+}
+
+.login__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--chat-background-color);
+    border-radius: 10px;
+    width: 280px;
+    height: 320px;
+}
+
+.login__container > img {
+    width: 150px;
+    height: 150px;
+}
+
+.login__container > h1 {
+    font-size: x-large;
+    margin-bottom: 20px;
+}
