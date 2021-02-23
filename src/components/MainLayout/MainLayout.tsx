@@ -1,6 +1,8 @@
 import React from 'react';
 import './MainLayout.css';
 import Sidebar from '../Sidebar/Sidebar';
+import Chat from '../Chat/Chat';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 const MainLayout = () => {
     return (
@@ -12,11 +14,14 @@ const MainLayout = () => {
                     <Sidebar />
                 </div>
                 <div className="mainLayout__chat">
-                    <h1>Chat</h1>
+                <Switch>
+                    <Route path='/room/:roomId' component={Chat} />
+                    <Route to='/' component={Chat}/>
+                </Switch>
                 </div>
             </div>
         </div>
     )
 }
 
-export default MainLayout;
+export default withRouter(MainLayout);
