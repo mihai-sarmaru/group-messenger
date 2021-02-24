@@ -47,7 +47,7 @@ const Sidebar = () => {
                     <Avatar src={user.avatar} alt={user.name} />
                 </Tooltip>
                 <h1>Group Messenger</h1>
-                <Tooltip title='Add Channel'>
+                <Tooltip title='Add Room'>
                     <IconButton onClick={addNewRoom}>
                         <MdIcons.MdAddCircleOutline />
                     </IconButton>
