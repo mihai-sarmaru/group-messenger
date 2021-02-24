@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { IUser } from '../store/User/User';
 
 export interface IRoom {
     id?: string;
@@ -15,10 +16,8 @@ export interface ChatParamTypes {
 }
 
 export interface IMessage {
-    uid: string;
-    name: string;
-    email: string;
-    avatar: string;
+    id?: string;
+    user: IUser;
     message: string;
     timestamp: firebase.firestore.FieldValue;
 }
