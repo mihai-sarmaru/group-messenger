@@ -16,7 +16,6 @@
 .sidebar__header > .MuiAvatar-root {
     width: 30px;
     height: 30px;
-    margin-top: 2px;
 }
 
 .sidebar__header > h1 {
@@ -27,7 +26,6 @@
     width: 35px;
     height: 35px;
     padding: 5px;
-    margin-top: 5px;
 }
 
 .sidebar__search > form {
@@ -37,7 +35,7 @@
     align-items: center;
     background-color: var(--sidebar-search);
     border-radius: 2px;
-    margin: 0 15px 15px 15px;
+    margin: 5px 15px 15px 15px;
     padding: 10px 15px;
 }
 
@@ -62,6 +60,10 @@
     color: inherit;
 }
 
+.sidebar-selectedItem {
+    background-color: red;
+}
+
 @media screen and (max-width: 720px) {
     .sidebar {
         width: 75px;
@@ -70,6 +72,9 @@
     .sidebar__header {
         display: flex;
         flex-direction: column;
+    }
+    .sidebar__header > button {
+        margin-bottom: 10px;
     }
 
     .sidebar__header > h1 {
