@@ -27,10 +27,11 @@
 }
 
 .chat__header {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    padding-bottom: 15px;
-    margin: 15px;
+    padding-bottom: 12px;
+    margin: 10px 15px;
     border-bottom: 1px solid var(--sidebar-background-color);
 }
 
@@ -58,7 +59,7 @@
 
 .chat__footer > form > input {
     flex-grow: 1;
-    border: none;
+    border: 1px solid var(--sidebar-background-color);
     outline: none;
     padding: 10px 20px;
     margin-right: 10px;
@@ -68,4 +69,8 @@
 
 .chat__footer > form > button > span > svg {
     color: var(--accent-color);
+}
+
+.chat__footer > form > .chat__invalidMessage {
+    border: 1px solid var(--invalid-color);
 }

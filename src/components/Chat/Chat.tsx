@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Chat.css';
 import firebase from 'firebase';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { Avatar, Button, IconButton, Tooltip } from '@material-ui/core';
 import db from '../../firebase/firebase';
 import { IFirebaseRoom, IMessage, IRoom } from '../../utils/interfaces';
@@ -16,16 +16,19 @@ import { AppState } from '../../store/rootStore';
 const Chat = () => {
 
     const { roomId } = useParams<ChatParamTypes>();
+    const history = useHistory();
 
     const user = useSelector((state: AppState) => state.userReducer.user);
 
     const [currentRoom, setCurrentRoom] = useState<IFirebaseRoom>();
     const [dbMessages, setDbMessages] = useState<IMessage[]>();
     const [messageToSend, setMessageToSend] = useState('');
+    const [validMessage, setValidMessage] = useState(true);
 
     useEffect(() => {
+        let unsubscribe: () => void = () => undefined;
         if (roomId) {
-            db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
+            unsubscribe = db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
                 setCurrentRoom({
                     id: snapshot.id,
                     data: snapshot.data()!
@@ -49,6 +52,7 @@ const Chat = () => {
                 }));
             });
         }
+        return unsubscribe;
     }, [roomId]);
 
     const addNewRoom = () => {
@@ -65,21 +69,35 @@ const Chat = () => {
 
     const onSendMessage = (e: React.FormEvent) => {
         e.preventDefault();
-
-        const msg: IMessage = {
-            user: {
-                uid: user.uid,
-                name: user.name,
-                email: user.email,
-                avatar: user.avatar
-            },
-            message: messageToSend,
-            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-        }
-
-        db.collection('rooms').doc(roomId).collection('messages').add(msg);
         
-        setMessageToSend('');
+        if (messageToSend.trim().length > 1 && messageToSend.trim().length < 750) {
+            setValidMessage(true);
+
+            const msg: IMessage = {
+                user: {
+                    uid: user.uid,
+                    name: user.name,
+                    email: user.email,
+                    avatar: user.avatar
+                },
+                message: messageToSend,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }
+    
+            db.collection('rooms').doc(roomId).collection('messages').add(msg);
+            
+            setMessageToSend('');
+        } else {
+            setValidMessage(false);
+        }
+    }
+
+    const onDeleteRoom = () => {
+        if (window.confirm('Are you sure you want to permanently remove this room and all its messages?')) {
+            setCurrentRoom(undefined);
+            history.push('/');
+            db.collection('rooms').doc(roomId).delete();
+        }
     }
 
     return (
@@ -96,6 +114,12 @@ const Chat = () => {
                     <div className="chat__header">
                         <Avatar src={`${env.getAvatarAPI()}${currentRoom?.data.name}.svg`} />
                         <h1>{currentRoom?.data.name}</h1>
+                        <Tooltip title='Delete room'>
+                            <IconButton color='secondary'
+                                onClick={onDeleteRoom}>
+                                <MdIcons.MdDeleteForever />
+                            </IconButton>
+                        </Tooltip>
                     </div>
 
                     <div className="chat__content">
@@ -105,6 +129,7 @@ const Chat = () => {
                     <div className="chat__footer">
                         <form onSubmit={onSendMessage}>
                             <input type='text' placeholder='Type a message...'
+                                className={validMessage ? '' : 'chat__invalidMessage'}
                                 onChange={(e: React.FormEvent<HTMLInputElement>) => setMessageToSend(e.currentTarget.value)}
                                 value={messageToSend} />
                             <Tooltip title='Send Message'>
