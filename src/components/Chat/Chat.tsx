@@ -29,10 +29,15 @@ const Chat = () => {
         let unsubscribe: () => void = () => undefined;
         if (roomId) {
             unsubscribe = db.collection('rooms').doc(roomId).onSnapshot(snapshot => {
-                setCurrentRoom({
-                    id: snapshot.id,
-                    data: snapshot.data()!
-                });
+                if (snapshot.data() !== undefined) {
+                    setCurrentRoom({
+                        id: snapshot.id,
+                        data: snapshot.data()!
+                    });
+                } else {
+                    setCurrentRoom(undefined);
+                    history.push('/');
+                }
             });
 
             db.collection('rooms').doc(roomId).collection('messages').orderBy('timestamp', 'desc').onSnapshot(snapshot => {
