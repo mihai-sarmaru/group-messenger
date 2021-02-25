@@ -1,17 +1,13 @@
 .sidebarItem {
     padding: 10px 15px 10px 15px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    background-color: inherit;
 }
 
 .sidebarItem:hover {
     background-color: var(--sidebar-hover-room);
     cursor: pointer;
-}
-
-.sidebarItem-selected {
-    background-color: red;
 }
 
 .sidebarItem > .MuiAvatar-root {
@@ -41,4 +37,23 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 720px) {
+    .sidebarItem {
+        padding: 10px 0;
+        justify-content: center;
+    }
+
+    .sidebarItem__content {
+        margin: 0;
+    }
+
+    .sidebarItem__content > h6 {
+        display: none;
+    }
+
+    .sidebarItem__content > p {
+        display: none;
+    }
 }

@@ -7,13 +7,29 @@ import { IRoom, IFirebaseRoom } from '../../utils/interfaces';
 import { validateRoomName } from '../../utils/validation';
 import * as MdIcons from 'react-icons/md';
 import SidebarItem from './SidebarItem/SidebarItem';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../store/rootStore';
 
-const Sidebar = () => {
+interface SidebarProps {
+    logout: () => void;
+}
 
+const Sidebar:React.FC<SidebarProps> = (props) => {
+
+    const [originalRooms, setOriginalRooms] = useState<IFirebaseRoom[]>();
     const [rooms, setRooms] = useState<IFirebaseRoom[]>();
+    const [search, setSearch] = useState('');
+
+    const user = useSelector((state: AppState) => state.userReducer.user);
 
     useEffect(() => {
         db.collection('rooms').orderBy('name', 'asc').onSnapshot(snapshot => {
+            setOriginalRooms(snapshot.docs.map(doc => {
+                return {
+                    id: doc.id,
+                    data: doc.data()
+                }
+            }));
             setRooms(snapshot.docs.map(doc => {
                 return {
                     id: doc.id,
@@ -35,13 +51,27 @@ const Sidebar = () => {
         }
     }
 
+    const onSearch = (e: React.FormEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        setSearch(e.currentTarget.value);
+        if (e.currentTarget.value === '') {
+            setRooms(originalRooms);
+        } else {
+            setRooms(originalRooms?.filter(room => (room.data.name as string).toLowerCase().includes(e.currentTarget.value)));
+        }
+    }
+
     return (
         <div className='sidebar'>
 
             <div className="sidebar__header">
-                <Avatar />
+                <Tooltip title={`Logout ${user.name}`}>
+                    <IconButton onClick={props.logout}>
+                        <Avatar src={user.avatar} alt={user.name} />
+                    </IconButton>
+                </Tooltip>
                 <h1>Group Messenger</h1>
-                <Tooltip title='Add Channel'>
+                <Tooltip title='Add Room'>
                     <IconButton onClick={addNewRoom}>
                         <MdIcons.MdAddCircleOutline />
                     </IconButton>
@@ -50,7 +80,9 @@ const Sidebar = () => {
 
             <div className="sidebar__search">
                 <form>
-                    <input type='text' placeholder='Search' />
+                    <input type='text' placeholder='Search'
+                    onChange={(e: React.FormEvent<HTMLInputElement>) => onSearch(e)}
+                    value={search} />
                     <MdIcons.MdSearch />
                 </form>
             </div>

@@ -14,7 +14,6 @@
 
 .mainLayout__sidebar {
     background-color: var(--sidebar-background-color);
-    width: 320px;
 }
 
 .mainLayout__chat {

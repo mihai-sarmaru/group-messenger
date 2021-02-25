@@ -5,27 +5,38 @@
 }
 
 .chatItem > .MuiAvatar-root {
-    width: 27px;
-    height: 27px;
+    width: 30px;
+    height: 30px;
 }
 
 .chatItem__message {
+    display: flex;
+    flex-direction: column;
     margin-left: 10px;
     max-width: 500px;
-    min-width: 200px;
 }
 
-.chatItem__message > h6 {
-    margin-left: 8px;
+.chatItem__messageInfo {
+    display: flex;
+}
+
+.chatItem__messageInfo > h6 {
+    margin: 0 8px;
     font-weight: 500;
+}
+
+.chatItem__messageInfo > p {
+    font-size: 11px;
+    color: var(--fatetime-text-color);
 }
 
 .chatItem__message > p {
     font-size: 14px;
     color: var(--primary-text-color);
     background-color: var(--sidebar-background-color);
-    padding: 5px 10px;
+    padding: 5px 12px;
     border-radius: 15px;
+    width: fit-content;
 }
 
 .chatItem-user {
@@ -33,8 +44,13 @@
 }
 
 .chatItem-user > .chatItem__message {
+    align-items: flex-end;
     margin-left: 0;
     margin-right: 10px;
+}
+
+.chatItem-user > .chatItem__message > .chatItem__messageInfo {
+    flex-direction: row-reverse;
 }
 
 .chatItem-user > .chatItem__message > h6 {
